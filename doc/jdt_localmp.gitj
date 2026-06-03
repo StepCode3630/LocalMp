@@ -1,0 +1,19 @@
+{
+    "repoUrl": "https://github.com/StepCode3630/Passion-lecture",
+  "projectName": "jdt_localMp",
+    "branch": "main",
+  "me": "StepCode3630",
+  "journalStartDate": null,
+  "exceptions": [
+    {
+      "id": "6abea4ec-c0c7-4bca-b0bc-026ccde93b50",
+      "type": "commitless",
+      "name": "chore: test",
+      "description": "",
+      "date": "2026-06-03T13:17:00.000Z",
+      "duration": 0,
+      "status": "DONE",
+      "author": "StepCode3630"
+    }
+  ]
+}
