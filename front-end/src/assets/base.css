@@ -26,28 +26,16 @@
   --color-background: var(--vt-c-white);
   --color-background-soft: var(--vt-c-white-soft);
   --color-background-mute: var(--vt-c-white-mute);
-
   --color-border: var(--vt-c-divider-light-2);
   --color-border-hover: var(--vt-c-divider-light-1);
-
   --color-heading: var(--vt-c-text-light-1);
   --color-text: var(--vt-c-text-light-1);
-
+  --bg-gradient: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(216, 216, 216, 1) 100%);
   --section-gap: 160px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
-
-    --color-border: var(--vt-c-divider-dark-2);
-    --color-border-hover: var(--vt-c-divider-dark-1);
-
-    --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
-  }
+  --color-background-header: var(--color-blue);
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-toggle: var(--color-acid-yellow);
+  --color-toggle2: var(--color-acid-black);
 }
 
 /*Personal palette*/
@@ -57,6 +45,44 @@
   --color-orange: #ff5e5b;
   --color-grey: #d8d8d8;
   --color-blue: #b9c9dd;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: var(--vt-c-black);
+    --color-background-soft: var(--vt-c-black-soft);
+    --color-background-mute: var(--vt-c-black-mute);
+    --color-border: var(--vt-c-divider-dark-2);
+    --color-border-hover: var(--vt-c-divider-dark-1);
+    --color-heading: var(--vt-c-text-dark-1);
+    --color-text: var(--vt-c-text-dark-2);
+    --bg-gradient: linear-gradient(
+      135deg,
+      var(--color-acid-black) 0%,
+      #111 0%,
+      var(--color-acid-yellow) 100%
+    );
+  }
+}
+
+.dark {
+  --color-background: #56584f;
+  --color-background-soft: var(--color-acid-black);
+  --color-background-mute: rgba(22, 26, 3, 0.7);
+  --color-border: rgba(203, 255, 0, 0.18);
+  --color-border-hover: rgba(203, 255, 0, 0.28);
+  --color-heading: var(--color-acid-yellow);
+  --color-text: rgba(255, 255, 255, 0.95);
+  --bg-gradient: linear-gradient(
+    180deg,
+    var(--color-acid-black) 0%,
+    #111 65%,
+    var(--color-acid-yellow) 100%
+  );
+  --color-background-header: transparent;
+  --color-shadow: rgba(203, 255, 0, 0.2);
+  --color-toggle: var(--color-acid-black);
+  --color-toggle2: var(--color-acid-yellow);
 }
 
 *,
@@ -70,10 +96,10 @@
 body {
   min-height: 100vh;
   color: var(--color-text);
-  background: var(--color-background);
+  background: var(--bg-gradient);
   transition:
     color 0.5s,
-    background-color 0.5s;
+    background 0.5s;
   line-height: 1.6;
   font-family:
     Inter,

@@ -80,11 +80,13 @@ export default {
   max-width: 800px;
   margin: 50px auto;
   padding: 30px;
-  background: var(--color-grey);
+  background: var(--color-background-soft);
   border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  color: white;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 10px 30px var(--color-shadow);
+  color: var(--color-text);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 h1 {
@@ -98,7 +100,7 @@ h1 {
   gap: 8px;
   justify-content: center;
   margin-bottom: 30px;
-  background: var(--color-acid-black);
+  background: var(--color-toggle2);
   padding: 6px;
   border-radius: 25px;
   width: fit-content;
@@ -110,7 +112,7 @@ h1 {
   padding: 10px 20px;
   border: none;
   background: transparent;
-  color: #ffffff;
+  color: var(--color-toggle);
   border-radius: 20px;
   cursor: pointer;
   font-size: 0.95rem;
@@ -121,14 +123,14 @@ h1 {
 }
 
 .toggle-btn:hover:not(.active) {
-  color: var(--color-acid-yellow);
+  color: white;
 }
 
 .toggle-btn.active {
-  background: var(--color-acid-yellow);
-  color: #000;
+  background: var(--color-toggle);
+  color: var(--color-toggle2);
   font-weight: 700;
-  box-shadow: 0 2px 8px var(--color-acid-yellow);
+  box-shadow: 0 2px 8px var(--color-toggle2);
 }
 
 .platform-selector {
@@ -141,9 +143,9 @@ h1 {
 
 .platform-selector button {
   padding: 12px 30px;
-  border: 0px solid white;
-  background: white;
-  color: rgb(0, 0, 0);
+  border: 0px solid transparent;
+  background: var(--color-background);
+  color: var(--color-text);
   border-radius: 8px;
   cursor: pointer;
   font-size: 1.1rem;
@@ -157,15 +159,15 @@ h1 {
 .platform-selector button:hover {
   transition: all 0.3s ease;
   box-shadow:
-    0 8px 14px rgba(0, 0, 0, 0.22),
-    inset 0 1px rgba(255, 255, 255, 0.1);
+    0 12px 24px var(--color-shadow),
+    -6px -6px 20px var(--color-shadow);
 }
 
 .platform-selector button.active {
   font-weight: bold;
   box-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.18),
-    inset 0 -6px 10px rgba(0, 0, 0, 0.15);
+    0 2px 4px var(--color-shadow),
+    inset 0 -6px 10px var(--color-shadow);
 }
 
 .info-btn {
@@ -220,17 +222,17 @@ h1 {
 .input-section input {
   flex: 1;
   padding: 12px 15px;
-  border: 0px solid white;
+  border: 0px solid transparent;
   border-radius: 8px;
   font-size: 1rem;
-  background: white;
-  color: #333;
+  background: var(--color-background);
+  color: var(--color-text);
   transition: all 0.3s ease;
 }
 
 .input-section input::placeholder {
-  color: black;
-  opacity: 0.7;
+  color: var(--color-text);
+  opacity: 0.6;
 }
 
 .input-section input:focus {
@@ -248,6 +250,6 @@ h1 {
   text-align: center;
   font-size: 1.1rem;
   margin-bottom: 30px;
-  color: var(--color-acid-black);
+  color: var(--color-text);
 }
 </style>

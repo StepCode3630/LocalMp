@@ -17,8 +17,6 @@ import TheWelcome from './components/TheWelcome.vue'
 
 <style scoped>
 main {
-  background: #ffffff;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(216, 216, 216, 1) 100%);
   min-height: calc(84vh + 2px);
 }
 </style>
