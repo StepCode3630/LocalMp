@@ -2,21 +2,25 @@
 import type { routes } from './index.ts'
 
 export interface ApiDefinition {
-  auth: {
-    newAccount: {
-      store: typeof routes['auth.new_account.store']
+  api: {
+    auth: {
+      newAccount: {
+        store: typeof routes['api.auth.new_account.store']
+      }
+      accessTokens: {
+        store: typeof routes['api.auth.access_tokens.store']
+      }
     }
-    accessTokens: {
-      store: typeof routes['auth.access_tokens.store']
-    }
-  }
-  profile: {
     profile: {
-      show: typeof routes['profile.profile.show']
+      profile: {
+        show: typeof routes['api.profile.profile.show']
+      }
+      accessTokens: {
+        destroy: typeof routes['api.profile.access_tokens.destroy']
+      }
     }
-    accessTokens: {
-      destroy: typeof routes['profile.access_tokens.destroy']
+    youTube: {
+      playlist: typeof routes['api.you_tube.playlist']
     }
   }
-  downloadTiktok: typeof routes['download_tiktok']
 }

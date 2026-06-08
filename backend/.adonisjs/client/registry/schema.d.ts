@@ -7,7 +7,7 @@ import type { InferInput, SimpleError } from '@vinejs/vine/types'
 export type ParamValue = string | number | bigint | boolean
 
 export interface Registry {
-  'auth.new_account.store': {
+  'api.auth.new_account.store': {
     methods: ["POST"]
     pattern: '/api/v1/auth/signup'
     types: {
@@ -19,7 +19,7 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/new_account_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'auth.access_tokens.store': {
+  'api.auth.access_tokens.store': {
     methods: ["POST"]
     pattern: '/api/v1/auth/login'
     types: {
@@ -31,7 +31,7 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/access_tokens_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'profile.profile.show': {
+  'api.profile.profile.show': {
     methods: ["GET","HEAD"]
     pattern: '/api/v1/account/profile'
     types: {
@@ -43,7 +43,7 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/profile_controller').default['show']>>>
     }
   }
-  'profile.access_tokens.destroy': {
+  'api.profile.access_tokens.destroy': {
     methods: ["POST"]
     pattern: '/api/v1/account/logout'
     types: {
@@ -55,16 +55,16 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/access_tokens_controller').default['destroy']>>>
     }
   }
-  'download_tiktok': {
-    methods: ["POST"]
-    pattern: '/download'
+  'api.you_tube.playlist': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/playlist/:playlistId'
     types: {
       body: {}
-      paramsTuple: []
-      params: {}
+      paramsTuple: [ParamValue]
+      params: { playlistId: ParamValue }
       query: {}
-      response: unknown
-      errorResponse: unknown
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/youtubes_controller').default['playlist']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/youtubes_controller').default['playlist']>>>
     }
   }
 }

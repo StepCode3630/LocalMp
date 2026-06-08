@@ -5,7 +5,7 @@
 
 export const controllers = {
   AccessTokens: () => import('#controllers/access_tokens_controller'),
-  DownloadTiktoks: () => import('#controllers/download_tiktoks_controller'),
   NewAccount: () => import('#controllers/new_account_controller'),
   Profile: () => import('#controllers/profile_controller'),
+  Youtubes: () => import('#controllers/youtubes_controller'),
 }
