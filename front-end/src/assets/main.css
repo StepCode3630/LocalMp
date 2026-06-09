@@ -24,3 +24,22 @@
   transition: all 0.3s ease;
   opacity: 0.9;
 }
+
+.btn-no-cta {
+  background-color: transparent;
+  color: var(--color-text);
+  border: 2px solid var(--color-text);
+  border-radius: 20px;
+  width: 100px;
+  margin: 10px;
+  height: 55px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-no-cta:hover {
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+  opacity: 0.9;
+}

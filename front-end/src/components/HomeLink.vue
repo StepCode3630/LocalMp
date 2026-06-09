@@ -48,12 +48,14 @@
 
     <div class="input-section">
       <input v-model="url" type="text" placeholder="Enter link here..." @keyup.enter="search" />
-      <button @click="search" class="btn-cta">Search</button>
+      <RouterLink :to="{ name: 'Show', params: { playlistId } }" class="btn-cta">Search</RouterLink>
     </div>
   </div>
 </template>
 
 <script>
+import { getPlaylists } from '@/api/apiPlaylist'
+
 export default {
   name: 'HomeLink',
   data() {
@@ -65,11 +67,36 @@ export default {
     }
   },
   methods: {
+    extractPlaylistIdYtb(url) {
+      // This function would contain logic to extract the playlist ID from the URL
+      // For example, for YouTube it might look for "list=" in the URL and extract the following string
+      // For TikTok, it might look for a specific pattern in the URL
+      // This is a placeholder implementation and should be expanded based on actual URL formats
+      const youtubeMatch = url.match(/[?&]list=([A-Za-z0-9_-]+)/)
+      if (youtubeMatch) {
+        return youtubeMatch[1]
+      }
+      return null
+    },
     search() {
       if (this.url.trim()) {
         console.log(`Downloading ${this.format} from ${this.platform}: ${this.url}`)
+        getPlaylists(this.extractPlaylistIdYtb(this.url))
+          .then((response) => {
+            // handle the response, e.g., show available playlists or start download
+            console.log('Playlists retrieved:', response)
+          })
+          .catch((error) => {
+            console.error('Error retrieving playlists:', error)
+            // handle error, e.g., show an error message to the user
+          })
         // logic downloading media based on selected format and platform would go here
       }
+    },
+
+  computed: {
+    playlistId() {
+      return this.extractPlaylistIdYtb(this.url)
     },
   },
 }
