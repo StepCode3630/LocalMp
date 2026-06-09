@@ -1,5 +1,5 @@
 <template>
-  <footer :class="{ 'light-mode': !isDarkMode, 'dark-mode': isDarkMode }">
+  <footer>
     <div class="footer-content">
       <div class="footer-left">
         <p>&copy; 2026 LocalMp</p>
@@ -26,7 +26,7 @@
   </footer>
 </template>
 
-<script></script>
+<script setup></script>
 
 <style scoped>
 footer {
@@ -34,6 +34,7 @@ footer {
   margin-top: calc(2rem + 12px);
   transition: all 0.3s ease;
   background-color: var(--color-background-header);
+  color: var(--color-text);
 }
 
 .footer-content {
@@ -49,7 +50,7 @@ footer {
 .footer-left {
   font-size: 0.9rem;
   font-weight: 500;
-  color: #000;
+  color: var(--color-text);
 }
 
 .footer-left p {
@@ -64,7 +65,7 @@ footer {
 }
 
 .footer-link {
-  color: #000;
+  color: var(--color-text);
   text-decoration: none;
   transition: opacity 0.3s ease;
 }
@@ -75,7 +76,7 @@ footer {
 
 .separator {
   margin: 0 0.5rem;
-  color: #000;
+  color: var(--color-text);
 }
 
 .footer-right {
@@ -87,7 +88,7 @@ footer {
 .contact-btn {
   background: none;
   border: none;
-  color: #000;
+  color: var(--color-text);
   padding: 0.5rem 1rem;
   cursor: pointer;
   font-size: 0.9rem;

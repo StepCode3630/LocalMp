@@ -47,24 +47,6 @@
   --color-blue: #b9c9dd;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
-    --color-border: var(--vt-c-divider-dark-2);
-    --color-border-hover: var(--vt-c-divider-dark-1);
-    --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
-    --bg-gradient: linear-gradient(
-      135deg,
-      var(--color-acid-black) 0%,
-      #111 0%,
-      var(--color-acid-yellow) 100%
-    );
-  }
-}
-
 .dark {
   --color-background: #56584f;
   --color-background-soft: var(--color-acid-black);
