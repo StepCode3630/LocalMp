@@ -8,7 +8,7 @@ http:
   url: "{{baseUrl}}/api/v1/playlist/:playlistId"
   params:
     - name: playlistId
-      value: PL9tY0BWXOZFtwzdsm2-EL-4tiR0EqRPz1
+      value: PLdthj_QAmL4l90G_0vgsxNgdZu0y5IYpI
       type: path
   auth: inherit
 
