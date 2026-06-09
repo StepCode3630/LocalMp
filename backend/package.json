@@ -65,6 +65,7 @@
     "@japa/api-client": "^3.2.1",
     "@tuyau/core": "^1.2.2",
     "@vinejs/vine": "^4.4.0",
+    "axios": "^1.17.0",
     "better-sqlite3": "^12.10.0",
     "cheerio": "^1.2.0",
     "luxon": "^3.7.2",
