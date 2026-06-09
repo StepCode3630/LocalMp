@@ -100,7 +100,6 @@ export default class YouTubeController {
           duration: item.contentDetails?.duration ?? null,
           likeCount: statistics.likeCount ? Number(statistics.likeCount) : 0,
           commentCount: statistics.commentCount ? Number(statistics.commentCount) : 0,
-          shareCount: 0, // vidéos.list ne fournit pas shareCount publiquement
         }
       })
 
