@@ -8,6 +8,10 @@ onMounted(() => {
   isDark.value = document.documentElement.classList.contains('dark')
 })
 
+const goHome = () => {
+  window.location.href = '/'
+}
+
 const toggleDarkMode = () => {
   const html = document.documentElement
   isDark.value = !isDark.value
@@ -24,8 +28,20 @@ const toggleDarkMode = () => {
 
 <template>
   <div class="header">
-    <img v-if="isDark" src="../assets/music-library-svgrepo-com-light.svg" alt="logo" />
-    <img v-else src="../assets/music-library-svgrepo-com.svg" alt="logo" />
+    <img
+      @click="goHome"
+      class="logo"
+      v-if="isDark"
+      src="../assets/music-library-svgrepo-com-light.svg"
+      alt="logo"
+    />
+    <img
+      @click="goHome"
+      class="logo"
+      v-else
+      src="../assets/music-library-svgrepo-com.svg"
+      alt="logo"
+    />
 
     <div class="header-right">
       <button class="btn-cta">Log in</button>
@@ -82,5 +98,10 @@ const toggleDarkMode = () => {
   width: 24px;
   height: 24px;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.logo {
+  height: 100px;
+  cursor: pointer;
 }
 </style>
