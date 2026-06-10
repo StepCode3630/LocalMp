@@ -24,14 +24,16 @@
             @change="$emit('update:selectedVideos', selectedVideos)"
           />
           <div class="video-info">
-            <label :for="video.id">{{ video.title }}</label>
+            <a class="title" href="video.url" target="_blank" rel="noopener noreferrer">
+              <label :for="video.id">{{ video.title }}</label>
+            </a>
             <div class="meta">
               <span class="author">{{ video.authorName }}</span>
-              <img :src="video.authorAvatar" alt="authorAvatar" class="thumbnail" />
+              <img :src="video.authorAvatar" alt="authorAvatar" class="thumbnailPP" />
             </div>
             <div class="thumb-row">
               <span class="duration">{{ video.duration }}</span>
-              <img :src="video.thumbnail" alt="Video Thumbnail" class="thumbnail" />
+              <img :src="video.thumbnail" alt="Video Thumbnail" class="thumbnailMinia" />
             </div>
             <div class="counts">
               <div>
@@ -139,9 +141,9 @@ export default {
             videoIds: this.videoIds,
             videos: this.videos,
           }
-          sessionStorage.setItem(key, JSON.stringify(payload))
+          localStorage.setItem(key, JSON.stringify(payload))
         } catch (e) {
-          console.warn('sessionStorage set failed', e)
+          console.warn('localStorage set failed', e)
         }
       } catch (err) {
         console.error('Failed to fetch playlist videos', err)
@@ -154,18 +156,18 @@ export default {
     savePlaylist(playlistId, payload) {
       try {
         const key = `localmp:playlist:${playlistId}`
-        sessionStorage.setItem(key, JSON.stringify(payload))
+        localStorage.setItem(key, JSON.stringify(payload))
       } catch (err) {
-        console.error('Error saving playlist to sessionStorage:', err)
+        console.error('Error saving playlist to localStorage:', err)
       }
     },
     loadPlaylist(playlistId) {
       try {
         const key = `localmp:playlist:${playlistId}`
-        const raw = sessionStorage.getItem(key)
+        const raw = localStorage.getItem(key)
         return raw ? JSON.parse(raw) : null
       } catch (err) {
-        console.error('Error loading playlist from sessionStorage:', err)
+        console.error('Error loading playlist from localStorage:', err)
         return null
       }
     },
@@ -178,13 +180,90 @@ export default {
   color: #666;
 }
 .video-item {
+  border: var(--color-text) solid 1px;
+  border-radius: 25px;
+  padding: 15px;
+  margin: 15px;
+  /* keep the existing background as requested */
+  background: linear-gradient(90deg, var(--color-acid-black) 0%, var(--color-acid-yellow) 100%);
   display: flex;
-  gap: 12px;
-  padding: 8px 0;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
 }
-.thumbnail {
-  width: 80px;
-  height: auto;
+
+.title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #ffffff;
+  width: 300px;
+  margin: 20px;
+  transition: all 0.2s ease;
+}
+
+.title:hover {
+  text-decoration: underline;
+  color: var(--color-acid-yellow);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.title label {
+  cursor: pointer;
+}
+.thumbnailPP {
+  width: auto;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 100%;
+  margin-right: 30px;
+}
+
+.thumbnailMinia {
+  width: auto;
+  height: 100px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.video-info {
+  margin-left: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  color: var(--color-text);
+}
+.video-info .meta {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  font-weight: 600;
+}
+.video-info .meta .author {
+  color: var(--color-text);
+}
+.thumb-row {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 12px;
+}
+.duration {
+  background: var(--color-text2);
+  color: var(--color-text);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+.counts {
+  display: flex;
+  gap: 16px;
+  margin-top: 6px;
+  color: black;
+  font-size: 0.9rem;
 }
 .controls {
   margin-bottom: 12px;
