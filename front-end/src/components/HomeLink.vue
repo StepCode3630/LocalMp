@@ -1,22 +1,32 @@
 <template>
   <h1>Local Media Downloader mp3 & mp4</h1>
 
-  <div class="home-link-container">
+  <form class="home-link-container" @submit.prevent="search">
     <p class="description">
       Enter a link to a public album, choose between MP3 and MP4, select the platform, and download
       all the videos. You can log to see your albums and in to download private albums.
     </p>
     <div class="format-toggle">
-      <button :class="{ active: format === 'mp3' }" @click="format = 'mp3'" class="toggle-btn">
+      <button
+        type="button"
+        :class="{ active: format === 'mp3' }"
+        @click="format = 'mp3'"
+        class="toggle-btn"
+      >
         MP3
       </button>
-      <button :class="{ active: format === 'mp4' }" @click="format = 'mp4'" class="toggle-btn">
+      <button
+        type="button"
+        :class="{ active: format === 'mp4' }"
+        @click="format = 'mp4'"
+        class="toggle-btn"
+      >
         MP4
       </button>
     </div>
 
     <div class="platform-selector">
-      <button :class="{ active: platform === 'tiktok' }" @click="platform = 'tiktok'">
+      <button type="button" :class="{ active: platform === 'tiktok' }" @click="platform = 'tiktok'">
         <img class="icon" src="../assets/tiktok-svgrepo-com.svg" alt="TikTok" />
         TikTok
         <span
@@ -30,7 +40,11 @@
           </div>
         </span>
       </button>
-      <button :class="{ active: platform === 'youtube' }" @click="platform = 'youtube'">
+      <button
+        type="button"
+        :class="{ active: platform === 'youtube' }"
+        @click="platform = 'youtube'"
+      >
         <img class="icon" src="../assets/youtube-color-svgrepo-com.svg" alt="YouTube" />
         YouTube
         <span
@@ -47,14 +61,23 @@
     </div>
 
     <div class="input-section">
-      <input v-model="url" type="text" placeholder="Enter link here..." @keyup.enter="search" />
-      <RouterLink :to="{ name: 'Show', params: { playlistId } }" class="btn-cta">Search</RouterLink>
+      <input v-model="url" type="text" placeholder="Enter link here..." />
+      <button type="submit" class="btn-cta" :disabled="!playlistId">Search</button>
     </div>
-  </div>
+  </form>
 </template>
 
 <script>
+import { ref } from 'vue'
 import { getPlaylists } from '@/api/apiPlaylist'
+
+export function extractPlaylistIdYtb(url) {
+  const youtubeMatch = url.match(/[?&]list=([A-Za-z0-9_-]+)/)
+  if (youtubeMatch) {
+    return youtubeMatch[1]
+  }
+  return null
+}
 
 export default {
   name: 'HomeLink',
@@ -67,36 +90,43 @@ export default {
     }
   },
   methods: {
-    extractPlaylistIdYtb(url) {
-      // This function would contain logic to extract the playlist ID from the URL
-      // For example, for YouTube it might look for "list=" in the URL and extract the following string
-      // For TikTok, it might look for a specific pattern in the URL
-      // This is a placeholder implementation and should be expanded based on actual URL formats
-      const youtubeMatch = url.match(/[?&]list=([A-Za-z0-9_-]+)/)
-      if (youtubeMatch) {
-        return youtubeMatch[1]
-      }
-      return null
-    },
+    // extractPlaylistIdYtb(url) {
+    //   // This function would contain logic to extract the playlist ID from the URL
+    //   // For example, for YouTube it might look for "list=" in the URL and extract the following string
+    //   // For TikTok, it might look for a specific pattern in the URL
+    //   // This is a placeholder implementation and should be expanded based on actual URL formats
+    //   const youtubeMatch = url.match(/[?&]list=([A-Za-z0-9_-]+)/)
+    //   if (youtubeMatch) {
+    //     return youtubeMatch[1]
+    //   }
+    //   return null
+    // },
     search() {
-      if (this.url.trim()) {
-        console.log(`Downloading ${this.format} from ${this.platform}: ${this.url}`)
-        getPlaylists(this.extractPlaylistIdYtb(this.url))
-          .then((response) => {
-            // handle the response, e.g., show available playlists or start download
-            console.log('Playlists retrieved:', response)
-          })
-          .catch((error) => {
-            console.error('Error retrieving playlists:', error)
-            // handle error, e.g., show an error message to the user
-          })
-        // logic downloading media based on selected format and platform would go here
+      if (!this.url.trim()) return
+      const id = extractPlaylistIdYtb(this.url)
+      if (!id) {
+        // no playlist id found; inform the user
+        console.warn('No playlistId could be extracted from URL')
+        return
       }
+      console.log(`Downloading ${this.format} from ${this.platform}: ${this.url}`)
+      getPlaylists(id)
+        .then((response) => {
+          console.log('Playlists retrieved:', response)
+          // navigate to Show route with the found playlistId
+          if (this.$router) {
+            this.$router.push({ name: 'Show', params: { playlistId: id } })
+          }
+        })
+        .catch((error) => {
+          console.error('Error retrieving playlists:', error)
+        })
     },
+  },
 
   computed: {
     playlistId() {
-      return this.extractPlaylistIdYtb(this.url)
+      return extractPlaylistIdYtb(this.url)
     },
   },
 }
@@ -175,7 +205,6 @@ h1 {
   color: var(--color-text);
   border-radius: 8px;
   cursor: pointer;
-  font-size: 1.1rem;
   transition: all 0.3s ease;
   position: relative;
   display: flex;

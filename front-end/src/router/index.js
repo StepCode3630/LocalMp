@@ -12,6 +12,7 @@ const router = createRouter({
       path: '/show/:playlistId',
       name: 'Show',
       component: () => import('../components/ShowVideosInPlaylist.vue'),
+      props: true,
     },
   ],
 })

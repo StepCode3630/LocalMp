@@ -16,11 +16,11 @@
         <div class="video-info">
           <label :for="video.id">{{ video.title }}</label>
           <div>
-            <label :for="video.id">{{ video.author }}</label>
-            <img :src="video.thumbnail" alt="Thumbnail" class="thumbnail" />
+            <label :for="video.id">{{ video.authorName }}</label>
+            <img :src="video.authorAvatar" alt="authorAvatar" class="thumbnail" />
           </div>
           <label :for="video.id">{{ video.duration }}</label>
-          <img :src="video.imageVideo" alt="Video Thumbnail" class="thumbnail" />
+          <img :src="video.thumbnail" alt="Video Thumbnail" class="thumbnail" />
           <div>
             <div>
               <img src="../assets/like.svg" alt="Likes" class="icon" />
@@ -41,6 +41,8 @@
   </div>
 </template>
 <script>
+import { getPlaylists } from '@/api/apiPlaylist'
+
 export default {
   name: 'ShowVideosInPlaylist',
   data() {
@@ -54,6 +56,16 @@ export default {
       return this.$route.params.playlistId
     },
   },
+  watch: {
+    playlistId(newId, oldId) {
+      if (newId && newId !== oldId) {
+        this.fetchPlaylistVideos(newId)
+      } else if (!newId) {
+        this.videos = []
+        this.selectedVideos = []
+      }
+    },
+  },
   mounted() {
     // Fetch videos for the playlist when component mounts
     if (this.playlistId) {
@@ -61,10 +73,43 @@ export default {
     }
   },
   methods: {
-    fetchPlaylistVideos(playlistId) {
-      // TODO: Call API to fetch videos for the playlist
+    formatDuration(seconds) {
+      if (
+        seconds === undefined ||
+        seconds === null ||
+        seconds === '' ||
+        typeof seconds !== 'number'
+      )
+        return 'N/A'
+      if (typeof seconds == 'number') {
+        const mins = Math.floor(seconds / 60)
+        const secs = seconds % 60
+        return `${mins}:${secs.toString().padStart(2, '0')}`
+      }
+
+      const m = seconds.match(/PT(\d+H)?(\d+M)?(\d+S)?/)
+      if (m) {
+        const hours = m[1] ? parseInt(m[1]) : 0
+        const mins = m[2] ? parseInt(m[2]) : 0
+        const secs = m[3] ? parseInt(m[3]) : 0
+        return `${hours > 0 ? hours + ':' : ''}${mins}:${secs.toString().padStart(2, '0')}`
+      }
+      return 'N/A'
+    },
+    async fetchPlaylistVideos(playlistId) {
       console.log('Fetching videos for playlist:', playlistId)
-      // this.videos = ...
+      try {
+        const res = await getPlaylists(playlistId)
+        const vids = res?.videos ?? []
+        // map duration to a readable format
+        this.videos = vids.map((v) => ({
+          ...v,
+          duration: this.formatDuration(v.duration),
+        }))
+      } catch (err) {
+        console.error('Failed to fetch playlist videos', err)
+        this.videos = []
+      }
     },
   },
 }
