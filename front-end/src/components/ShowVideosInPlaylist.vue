@@ -24,7 +24,7 @@
             @change="$emit('update:selectedVideos', selectedVideos)"
           />
           <div class="video-info">
-            <a class="title" href="video.url" target="_blank" rel="noopener noreferrer">
+            <a class="title" :href="videoLink[video.id]" target="_blank" rel="noopener noreferrer">
               <label :for="video.id">{{ video.title }}</label>
             </a>
             <div class="meta">
@@ -72,6 +72,12 @@ export default {
   computed: {
     playlistId() {
       return this.$route?.params?.playlistId || null
+    },
+    videoLink() {
+      return this.videos.reduce((acc, video) => {
+        acc[video.id] = `https://www.youtube.com/watch?v=${video.id}`
+        return acc
+      }, {})
     },
   },
   watch: {
