@@ -25,7 +25,7 @@
           />
           <div class="video-info">
             <a class="title" :href="videoLink[video.id]" target="_blank" rel="noopener noreferrer">
-              <label :for="video.id">{{ video.title }}</label>
+              <p :for="video.id">{{ video.title }}</p>
             </a>
             <div class="meta">
               <span class="author">{{ video.authorName }}</span>
