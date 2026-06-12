@@ -11,8 +11,8 @@
 
       <div class="controls">
         <div>
-          <button class="btn-cta" @click="$emit('select-all')">Select all</button>
-          <button class="btn-no-cta" @click="$emit('deselect-all')">Deselect all</button>
+          <button class="btn-cta" @click="onSelectAll">Select all</button>
+          <button class="btn-no-cta" @click="onDeselectAll">Deselect all</button>
         </div>
         <button class="btn-cta" @click="$emit('download')">Download</button>
       </div>
@@ -21,15 +21,11 @@
       <div v-else-if="error" class="error">Erreur: {{ error }}</div>
 
       <div v-else>
-        <p><strong>Total: </strong> {{ videos.length }}</p>
+        <p><strong>Total videos: </strong> {{ videos.length }}</p>
+        <p><strong>Total selected videos: </strong> {{ selectedVideos.length }}</p>
+
         <div v-for="video in videos" :key="video.id" class="video-item">
-          <input
-            type="checkbox"
-            :id="video.id"
-            :value="video.id"
-            v-model="selectedVideos"
-            @change="$emit('update:selectedVideos', selectedVideos)"
-          />
+          <input type="checkbox" :id="video.id" :value="video.id" v-model="selectedVideos" />
           <div class="video-info">
             <a class="title" :href="videoLink[video.id]" target="_blank" rel="noopener noreferrer">
               <p :for="video.id">{{ video.title }}</p>
@@ -204,6 +200,14 @@ export default {
         console.error('Error loading playlist from localStorage:', err)
         return null
       }
+    },
+    onSelectAll() {
+      this.selectedVideos = this.videos.map((v) => v.id)
+      console.log('All select: ok :', this.selectedVideos.length)
+    },
+    onDeselectAll() {
+      this.selectedVideos = []
+      console.log('All deselect: ok')
     },
   },
 }
