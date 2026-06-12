@@ -28,7 +28,7 @@
               <p :for="video.id">{{ video.title }}</p>
             </a>
             <div class="meta">
-              <span class="author">{{ video.authorName }}</span>
+              <span class="author">{{ authorNameLimit(video.authorName) }}</span>
               <img :src="video.authorAvatar" alt="authorAvatar" class="thumbnailPP" />
             </div>
             <div class="thumb-row">
@@ -36,13 +36,13 @@
               <img :src="video.thumbnail" alt="Video Thumbnail" class="thumbnailMinia" />
             </div>
             <div class="counts">
-              <div>
+              <div class="center-all">
                 <img src="..//assets/like.svg" alt="Like" />
-                <span class="likes">{{ video.likeCount }}</span>
+                <span class="likes">{{ numberLimit(video.likeCount) }}</span>
               </div>
-              <div>
+              <div class="center-all">
                 <img src="../assets/comment.svg" alt="Comment" />
-                <span class="comments">{{ video.commentCount }}</span>
+                <span class="comments">{{ numberLimit(video.commentCount) }}</span>
               </div>
             </div>
           </div>
@@ -100,6 +100,18 @@ export default {
       this.videoIds = []
       this.loading = false
       this.error = null
+    },
+    authorNameLimit(authorVideo) {
+      if (authorVideo && authorVideo.length > 15) {
+        return authorVideo.substring(0, 12) + '...'
+      }
+      return authorVideo
+    },
+    numberLimit(number) {
+      if (number >= 1e9) return (number / 1e9).toFixed(1) + 'B'
+      if (number >= 1e6) return (number / 1e6).toFixed(1) + 'M'
+      if (number >= 1e3) return (number / 1e3).toFixed(1) + 'K'
+      return number.toString()
     },
     formatDuration(seconds) {
       if (seconds === undefined || seconds === null || seconds === '') return 'N/A'
@@ -214,7 +226,7 @@ export default {
   transition: all 0.3s ease;
 }
 
-.title label {
+.title p {
   cursor: pointer;
 }
 .thumbnailPP {
@@ -222,7 +234,6 @@ export default {
   height: 100px;
   object-fit: cover;
   border-radius: 100%;
-  margin-right: 30px;
 }
 
 .thumbnailMinia {
@@ -247,6 +258,7 @@ export default {
   flex-direction: column;
   gap: 10px;
   font-weight: 600;
+  margin-right: 30px;
 }
 .video-info .meta .author {
   color: var(--color-text);
@@ -264,6 +276,14 @@ export default {
   border-radius: 6px;
   font-size: 0.85rem;
 }
+
+.center-all {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .counts {
   display: flex;
   gap: 16px;
