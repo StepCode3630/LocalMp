@@ -37,6 +37,10 @@
             </div>
             <div class="counts">
               <div class="center-all">
+                <img src="../assets/view.svg" alt="Views" />
+                <span class="views">{{ numberLimit(video.viewCount) }}</span>
+              </div>
+              <div class="center-all">
                 <img src="..//assets/like.svg" alt="Like" />
                 <span class="likes">{{ numberLimit(video.likeCount) }}</span>
               </div>
@@ -282,6 +286,11 @@ export default {
   align-items: center;
   flex-direction: column;
   gap: 4px;
+}
+
+.center-all img {
+  width: 24px;
+  height: 24px;
 }
 
 .counts {

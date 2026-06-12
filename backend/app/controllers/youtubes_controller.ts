@@ -98,6 +98,7 @@ export default class YouTubeController {
             snippet.thumbnails?.default?.url ??
             null,
           duration: item.contentDetails?.duration ?? null,
+          viewCount: statistics.viewCount ? Number(statistics.viewCount) : 0,
           likeCount: statistics.likeCount ? Number(statistics.likeCount) : 0,
           commentCount: statistics.commentCount ? Number(statistics.commentCount) : 0,
         }
