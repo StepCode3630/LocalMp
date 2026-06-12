@@ -211,7 +211,7 @@ export default {
       console.log('All deselect: ok')
     },
     download() {
-      downloadSelected(this.selectedVideos, 'mp4')
+      downloadSelected(this.selectedVideos)
     },
   },
 }
