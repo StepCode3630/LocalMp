@@ -10,8 +10,11 @@
       </h1>
 
       <div class="controls">
-        <button class="btn-cta" @click="$emit('select-all')">Select all</button>
-        <button class="btn-no-cta" @click="$emit('deselect-all')">Deselect all</button>
+        <div>
+          <button class="btn-cta" @click="$emit('select-all')">Select all</button>
+          <button class="btn-no-cta" @click="$emit('deselect-all')">Deselect all</button>
+        </div>
+        <button class="btn-cta" @click="$emit('download')">Download</button>
       </div>
 
       <div v-if="loading">Chargement...</div>
@@ -55,8 +58,6 @@
             </div>
           </div>
         </div>
-
-        <button class="btn-cta" @click="$emit('download')">Download</button>
       </div>
     </div>
   </div>
@@ -318,6 +319,8 @@ h1 {
 }
 .controls {
   margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
 }
 .error {
   color: #b00020;
