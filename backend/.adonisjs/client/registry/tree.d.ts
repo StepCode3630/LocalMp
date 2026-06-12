@@ -21,6 +21,7 @@ export interface ApiDefinition {
     }
     youTube: {
       playlist: typeof routes['api.you_tube.playlist']
+      streamZip: typeof routes['api.you_tube.stream_zip']
     }
   }
 }

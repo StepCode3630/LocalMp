@@ -67,4 +67,16 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/youtubes_controller').default['playlist']>>>
     }
   }
+  'api.you_tube.stream_zip': {
+    methods: ["POST"]
+    pattern: '/api/v1/download'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/youtubes_controller').default['streamZip']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/youtubes_controller').default['streamZip']>>>
+    }
+  }
 }

@@ -9,6 +9,7 @@ export type ScannedRoutes = {
     'api.profile.profile.show': { paramsTuple?: []; params?: {} }
     'api.profile.access_tokens.destroy': { paramsTuple?: []; params?: {} }
     'api.you_tube.playlist': { paramsTuple: [ParamValue]; params: {'playlistId': ParamValue} }
+    'api.you_tube.stream_zip': { paramsTuple?: []; params?: {} }
   }
   GET: {
     'api.profile.profile.show': { paramsTuple?: []; params?: {} }
@@ -22,6 +23,7 @@ export type ScannedRoutes = {
     'api.auth.new_account.store': { paramsTuple?: []; params?: {} }
     'api.auth.access_tokens.store': { paramsTuple?: []; params?: {} }
     'api.profile.access_tokens.destroy': { paramsTuple?: []; params?: {} }
+    'api.you_tube.stream_zip': { paramsTuple?: []; params?: {} }
   }
 }
 declare module '@adonisjs/core/types/http' {

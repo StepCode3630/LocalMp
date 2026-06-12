@@ -14,7 +14,7 @@
           <button class="btn-cta" @click="onSelectAll">Select all</button>
           <button class="btn-no-cta" @click="onDeselectAll">Deselect all</button>
         </div>
-        <button class="btn-cta" @click="$emit('download')">Download</button>
+        <button class="btn-cta" @click="download">Download</button>
       </div>
 
       <div v-if="loading">Chargement...</div>
@@ -60,6 +60,7 @@
 </template>
 
 <script>
+import { downloadSelected } from '@/api/apiDownload'
 import { getPlaylists } from '@/api/apiPlaylist'
 
 export default {
@@ -208,6 +209,9 @@ export default {
     onDeselectAll() {
       this.selectedVideos = []
       console.log('All deselect: ok')
+    },
+    download() {
+      downloadSelected(this.selectedVideos, 'mp4')
     },
   },
 }

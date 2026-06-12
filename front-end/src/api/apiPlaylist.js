@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:3333/api/v1'
+export const API_BASE = 'http://localhost:3333/api/v1'
 
 export async function getPlaylists(playlistId, opts = {}) {
   const encodedId = encodeURIComponent(playlistId)

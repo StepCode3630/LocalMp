@@ -37,6 +37,8 @@ router
 
     // router.get('youtube/info', [YouTubeController, 'info2'])
     router.get('playlist/:playlistId', [YouTubeController, 'playlist'])
+
+    router.post('/download', [YouTubeController, 'streamZip'])
   })
   .prefix('/api/v1')
   .as('api')

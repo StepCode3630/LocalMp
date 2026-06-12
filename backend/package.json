@@ -46,6 +46,7 @@
     "@japa/plugin-adonisjs": "^5.2.0",
     "@japa/runner": "^5.3.0",
     "@poppinss/ts-exec": "^1.4.4",
+    "@types/archiver": "^8.0.0",
     "@types/luxon": "^3.7.1",
     "@types/node": "~25.9.1",
     "eslint": "^10.4.0",
@@ -65,12 +66,15 @@
     "@japa/api-client": "^3.2.1",
     "@tuyau/core": "^1.2.2",
     "@vinejs/vine": "^4.4.0",
+    "archiver": "^8.0.0",
     "axios": "^1.17.0",
     "better-sqlite3": "^12.10.0",
     "cheerio": "^1.2.0",
+    "cross-spawn": "^7.0.6",
     "luxon": "^3.7.2",
     "node-fetch": "^3.3.2",
-    "reflect-metadata": "^0.2.2"
+    "reflect-metadata": "^0.2.2",
+    "stream": "^0.0.3"
   },
   "hotHook": {
     "boundaries": [
