@@ -5,6 +5,10 @@
     </div>
 
     <div v-else>
+      <h1 v-if="titlePlaylist">
+        <strong>Playlist: <br /> </strong> {{ titlePlaylist }}
+      </h1>
+
       <div class="controls">
         <button class="btn-cta" @click="$emit('select-all')">Select all</button>
         <button class="btn-no-cta" @click="$emit('deselect-all')">Deselect all</button>
@@ -83,6 +87,10 @@ export default {
         return acc
       }, {})
     },
+    titlePlaylist() {
+      if (!this.playlistInfo) return ''
+      return this.playlistInfo.title ?? this.playlistInfo.playlistTitle ?? ''
+    },
   },
   watch: {
     playlistId(newId, oldId) {
@@ -136,7 +144,10 @@ export default {
     async loadOrFetch(playlistId) {
       const cached = this.loadPlaylist(playlistId)
       if (cached) {
-        this.playlistInfo = cached.playlistInfo ?? { id: playlistId }
+        this.playlistInfo = cached.playlistInfo ?? {
+          id: playlistId,
+          title: cached.playlistTitle ?? '',
+        }
         this.videoIds = cached.videoIds ?? []
         this.videos = (cached.videos ?? []).map((v) => ({
           ...v,
@@ -152,7 +163,7 @@ export default {
       try {
         const res = await getPlaylists(playlistId)
         const vids = res?.videos ?? []
-        this.playlistInfo = res?.playlist ?? { id: playlistId }
+        this.playlistInfo = res?.playlist ?? { id: playlistId, title: res?.titlePlaylist ?? '' }
         this.videoIds = res?.videoIds ?? vids.map((x) => x.id).filter(Boolean)
         this.videos = vids.map((v) => ({ ...v, duration: this.formatDuration(v.duration) }))
         // persist
@@ -200,6 +211,11 @@ export default {
 <style scoped>
 .no-playlist {
   color: #666;
+}
+
+h1 {
+  font-size: 1.5rem;
+  width: 1000px;
 }
 .video-item {
   border: var(--color-text) solid 1px;

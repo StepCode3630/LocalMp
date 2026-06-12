@@ -3,8 +3,6 @@
 // Use a loose any type for the context parameter.
 import { type HttpContext } from '@adonisjs/core/http'
 import axios from 'axios'
-import { time } from 'node:console'
-import { TIMEOUT } from 'node:dns'
 
 const YT_BATCH_STATS_URL = 'https://www.googleapis.com/youtube/v3/videos:batchGetStats'
 const YT_BASE = 'https://youtube.googleapis.com/youtube/v3'
@@ -33,24 +31,40 @@ export default class YouTubeController {
       const items = res.data.items || []
       console.log(`Fetched ${items.length} items from playlist ${playlistId}`)
 
+      // tenter d'obtenir le titre officiel/localisé de la playlist via l'endpoint playlists
+      let playlistTitle = 'Unknown Playlist'
+      try {
+        const plRes = await axios.get(`${YT_BASE}/playlists`, {
+          params: {
+            part: 'snippet,contentDetails',
+            id: playlistId,
+            key: API_KEY,
+          },
+          timeout: 5000,
+        })
+        const plItem = plRes.data.items && plRes.data.items[0]
+        playlistTitle = String(
+          plItem?.snippet?.localized?.title ??
+            plItem?.snippet?.title ??
+            items[0]?.snippet?.title ??
+            'Unknown Playlist'
+        )
+      } catch (e) {
+        // si l'appel échoue, fallback sur le snippet du premier item
+        playlistTitle = String(items[0]?.snippet?.title ?? 'Unknown Playlist')
+      }
+
       // Extraire videoIds depuis contentDetails ou fallback vers snippet.resourceId
       const videoIds = items
         .map((item: any) => {
-          if (item.contentDetails?.videoId) {
-            return item.contentDetails.videoId
-          }
-
-          if (item.snippet?.resourceId?.videoId) {
-            return item.snippet.resourceId.videoId
-          }
-
+          if (item.contentDetails?.videoId) return item.contentDetails.videoId
+          if (item.snippet?.resourceId?.videoId) return item.snippet.resourceId.videoId
           if (
             item.snippet?.resourceId?.kind === 'youtube#video' &&
             item.snippet?.resourceId?.videoId
           ) {
             return item.snippet.resourceId.videoId
           }
-
           return null
         })
         .filter(Boolean)
@@ -129,10 +143,15 @@ export default class YouTubeController {
         })
       }
 
-      // Retourne maintenant les videos ET la liste des videoIds
+      // Retourne maintenant les videos, le titre de la playlist et la liste des videoIds
       return response.ok({
+        playlist: {
+          id: playlistId,
+          title: playlistTitle,
+        },
+        titlePlaylist: playlistTitle,
         videos,
-        videoIds, // <-- ajouté
+        videoIds,
         nextPageToken: res.data.nextPageToken ?? null,
       })
     } catch (err: any) {
