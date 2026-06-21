@@ -54,7 +54,8 @@
         >
           <img class="info" src="../assets/info-circle-svgrepo-com.svg" alt="info" />
           <div v-if="showTooltip === 'youtube'" class="tooltip">
-            Download videos and audio from YouTube
+            Download videos and audio from YouTube <br />
+            Max 50 videos per playlist
           </div>
         </span>
       </button>

@@ -94,7 +94,7 @@ export default class YouTubeController {
         params: {
           part: 'snippet,statistics,contentDetails',
           id: videoIds.join(','),
-          maxResults: 50,
+          maxResults: MAX_BATCH,
           key: API_KEY,
         },
         timeout: 20000,
@@ -174,7 +174,7 @@ export default class YouTubeController {
     }
 
     // Safety limits
-    if (ids.length > 50) {
+    if (ids.length > MAX_BATCH) {
       return response.status(413).send({ error: 'Too many videos requested' })
     }
 
