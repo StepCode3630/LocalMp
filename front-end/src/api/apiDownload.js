@@ -11,7 +11,7 @@ export async function downloadSelected(ids, format = 'mp4') {
   const url = URL.createObjectURL(blob)
   const a = document.createElement('a')
   a.href = url
-  a.download = 'videos.zip'
+  a.download = `LocalMp_videosYtbIn${format}.zip`
   document.body.appendChild(a)
   a.click()
   a.remove()
