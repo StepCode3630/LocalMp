@@ -79,4 +79,16 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/youtubes_controller').default['streamZip']>>>
     }
   }
+  'api.tiktoks.playlist': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/playlistTikTok/:playlistId'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { playlistId: ParamValue }
+      query: {}
+      response: unknown
+      errorResponse: unknown
+    }
+  }
 }

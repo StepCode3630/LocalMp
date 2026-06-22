@@ -10,6 +10,7 @@
 import { middleware } from '#start/kernel'
 import router from '@adonisjs/core/services/router'
 import { controllers } from '#generated/controllers'
+import TiktoksController from '#controllers/tiktoks_controller'
 const YouTubeController = () => import('#controllers/youtubes_controller')
 
 router.get('/', () => {
@@ -39,6 +40,8 @@ router
     router.get('playlist/:playlistId', [YouTubeController, 'playlist'])
 
     router.post('/download', [YouTubeController, 'streamZip'])
+
+    router.get('playlistTikTok/:playlistId', [TiktoksController, 'playlist'])
   })
   .prefix('/api/v1')
   .as('api')

@@ -23,5 +23,8 @@ export interface ApiDefinition {
       playlist: typeof routes['api.you_tube.playlist']
       streamZip: typeof routes['api.you_tube.stream_zip']
     }
+    tiktoks: {
+      playlist: typeof routes['api.tiktoks.playlist']
+    }
   }
 }
