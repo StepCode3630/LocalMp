@@ -210,7 +210,7 @@ export default class YouTubeController {
 
       // Allow overriding the binary path via env var, otherwise rely on PATH
       const exe =
-        // process.env.YT_DLP_PATH || ///remove comment if you re on WIindows otherwise let like that while installing yt-dbl from github
+        process.env.YT_DLP_PATH || ///remove comment if you re on WIindows otherwise let like that while installing yt-dbl from github
         'yt-dlp'
 
       // Spawn process and return its stdout as stream
