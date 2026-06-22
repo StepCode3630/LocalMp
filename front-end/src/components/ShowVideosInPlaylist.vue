@@ -14,7 +14,27 @@
           <button class="btn-cta" @click="onSelectAll">Select all</button>
           <button class="btn-no-cta" @click="onDeselectAll">Deselect all</button>
         </div>
-        <button class="btn-cta" @click="download">Download</button>
+        <div>
+          <div class="format-toggle">
+            <button
+              type="button"
+              :class="{ active: format === 'mp3' }"
+              @click="format = 'mp3'"
+              class="toggle-btn"
+            >
+              MP3
+            </button>
+            <button
+              type="button"
+              :class="{ active: format === 'mp4' }"
+              @click="format = 'mp4'"
+              class="toggle-btn"
+            >
+              MP4
+            </button>
+            <button class="btn-cta" @click="download">Download</button>
+          </div>
+        </div>
       </div>
 
       <div v-if="loading">Chargement...</div>
@@ -67,6 +87,7 @@ export default {
   name: 'ShowVideosInPlaylist',
   data() {
     return {
+      format: 'mp3',
       videos: [],
       selectedVideos: [],
       playlistInfo: null,
@@ -211,7 +232,7 @@ export default {
       console.log('All deselect: ok')
     },
     download() {
-      downloadSelected(this.selectedVideos)
+      downloadSelected(this.selectedVideos, this.format)
     },
   },
 }
@@ -332,5 +353,39 @@ h1 {
 }
 .error {
   color: #b00020;
+}
+
+.format-toggle {
+  gap: 8px;
+  margin-bottom: 30px;
+  background: var(--color-toggle2);
+  padding: 6px;
+  border-radius: 25px;
+  width: fit-content;
+}
+
+.toggle-btn {
+  padding: 10px 20px;
+  border: none;
+  background: transparent;
+  color: var(--color-toggle);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.toggle-btn:hover:not(.active) {
+  color: white;
+}
+
+.toggle-btn.active {
+  background: var(--color-toggle);
+  color: var(--color-toggle2);
+  font-weight: 700;
+  box-shadow: 0 2px 8px var(--color-toggle2);
 }
 </style>

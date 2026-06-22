@@ -6,24 +6,6 @@
       Enter a link to a public album, choose between MP3 and MP4, select the platform, and download
       all the videos. You can log to see your albums and in to download private albums.
     </p>
-    <div class="format-toggle">
-      <button
-        type="button"
-        :class="{ active: format === 'mp3' }"
-        @click="format = 'mp3'"
-        class="toggle-btn"
-      >
-        MP3
-      </button>
-      <button
-        type="button"
-        :class="{ active: format === 'mp4' }"
-        @click="format = 'mp4'"
-        class="toggle-btn"
-      >
-        MP4
-      </button>
-    </div>
 
     <div class="platform-selector">
       <button type="button" :class="{ active: platform === 'tiktok' }" @click="platform = 'tiktok'">
@@ -84,7 +66,6 @@ export default {
   name: 'HomeLink',
   data() {
     return {
-      format: 'mp3',
       platform: 'youtube',
       url: '',
       showTooltip: null,
@@ -151,44 +132,6 @@ h1 {
   text-align: center;
   margin-bottom: 30px;
   font-size: 2.5rem;
-}
-
-.format-toggle {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-  margin-bottom: 30px;
-  background: var(--color-toggle2);
-  padding: 6px;
-  border-radius: 25px;
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.toggle-btn {
-  padding: 10px 20px;
-  border: none;
-  background: transparent;
-  color: var(--color-toggle);
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 0.95rem;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.toggle-btn:hover:not(.active) {
-  color: white;
-}
-
-.toggle-btn.active {
-  background: var(--color-toggle);
-  color: var(--color-toggle2);
-  font-weight: 700;
-  box-shadow: 0 2px 8px var(--color-toggle2);
 }
 
 .platform-selector {
