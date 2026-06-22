@@ -1,7 +1,6 @@
 {
-    "repoUrl": "https://github.com/StepCode3630/LocalMp",
   "projectName": "jdt_localMp",
-    "branch": "main",
+  "branch": "main",
   "me": "StepCode3630",
   "journalStartDate": null,
   "exceptions": [
@@ -12,6 +11,16 @@
       "description": "",
       "date": "2026-06-03T13:17:00.000Z",
       "duration": 0,
+      "status": "DONE",
+      "author": "StepCode3630"
+    },
+    {
+      "id": "ef497967-38b5-449b-ab3e-91ff28e1c17c",
+      "type": "commitless",
+      "name": "learn: utiliser tik tok api site web",
+      "description": "",
+      "date": "2026-06-22T10:36:00.000Z",
+      "duration": 135,
       "status": "DONE",
       "author": "StepCode3630"
     }
