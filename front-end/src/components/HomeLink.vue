@@ -54,6 +54,16 @@
 import { ref } from 'vue'
 import { getPlaylists } from '@/api/apiPlaylist'
 
+//////TEST !!!!
+const TT_BASE_URL = 'https:///open.tiktokapis.com/v2/research/playlist/info'
+
+try {
+  fetch(TT_BASE_URL + 11 + 'sdjsdjsjdjjs')
+  console.log('fetch tttttt ok👌')
+} catch {
+  console.log('fetch tttttt pas ok😒')
+}
+
 export function extractPlaylistIdYtb(url) {
   const youtubeMatch = url.match(/[?&]list=([A-Za-z0-9_-]+)/)
   if (youtubeMatch) {
