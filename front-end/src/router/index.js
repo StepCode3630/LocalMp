@@ -14,6 +14,11 @@ const router = createRouter({
       component: () => import('../components/auth.vue'),
     },
     {
+      path: '/profile',
+      name: 'Profile',
+      component: () => import('../components/Profile.vue'),
+    },
+    {
       path: '/show/:playlistId',
       name: 'Show',
       component: () => import('../components/ShowVideosInPlaylist.vue'),

@@ -19,10 +19,12 @@ export default class AccessTokensController {
         secure: false, // true en prod https
         path: '/',
         maxAge: 60 * 60 * 1000, // 1h
+        signed: false,
       })
       .json(
         serialize({
           user: UserTransformer.transform(user),
+          token: accessToken, // ajouté temporairement pour debug
         })
       )
   }

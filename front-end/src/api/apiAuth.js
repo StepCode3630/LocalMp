@@ -28,6 +28,10 @@ export async function submitLogin() {
     }
 
     message.value = 'Log in: ok.'
+    // notify other parts of the app that auth state changed
+    try {
+      window.dispatchEvent(new Event('auth-changed'))
+    } catch (e) {}
   } catch (err) {
     message.value = 'Error: ' + (err.message || err)
   }
@@ -57,6 +61,10 @@ export async function submitSignup() {
     }
 
     message.value = 'Sign in: ok.'
+    // notify other parts of the app that auth state changed
+    try {
+      window.dispatchEvent(new Event('auth-changed'))
+    } catch (e) {}
   } catch (err) {
     message.value = 'Error: ' + (err.message || err)
   }

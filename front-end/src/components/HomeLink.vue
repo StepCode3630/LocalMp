@@ -11,29 +11,17 @@
       <button type="button" :class="{ active: platform === 'tiktok' }" @click="platform = 'tiktok'">
         <img class="icon" src="../assets/tiktok-svgrepo-com.svg" alt="TikTok" />
         TikTok
-        <span
-          class="info-btn"
-          @mouseenter="showTooltip = 'tiktok'"
-          @mouseleave="showTooltip = null"
-        >
+        <span class="info-btn" @mouseenter="showTooltip = 'tiktok'" @mouseleave="showTooltip = null">
           <img class="info" src="../assets/info-circle-svgrepo-com.svg" alt="info" />
           <div v-if="showTooltip === 'tiktok'" class="tooltip">
             Download videos and audio from TikTok
           </div>
         </span>
       </button>
-      <button
-        type="button"
-        :class="{ active: platform === 'youtube' }"
-        @click="platform = 'youtube'"
-      >
+      <button type="button" :class="{ active: platform === 'youtube' }" @click="platform = 'youtube'">
         <img class="icon" src="../assets/youtube-color-svgrepo-com.svg" alt="YouTube" />
         YouTube
-        <span
-          class="info-btn"
-          @mouseenter="showTooltip = 'youtube'"
-          @mouseleave="showTooltip = null"
-        >
+        <span class="info-btn" @mouseenter="showTooltip = 'youtube'" @mouseleave="showTooltip = null">
           <img class="info" src="../assets/info-circle-svgrepo-com.svg" alt="info" />
           <div v-if="showTooltip === 'youtube'" class="tooltip">
             Download videos and audio from YouTube <br />
@@ -55,14 +43,14 @@ import { ref } from 'vue'
 import { getPlaylists } from '@/api/apiPlaylist'
 
 //////TEST !!!!
-const TT_BASE_URL = 'https:///open.tiktokapis.com/v2/research/playlist/info'
+// const TT_BASE_URL = 'https:///open.tiktokapis.com/v2/research/playlist/info'
 
-try {
-  fetch(TT_BASE_URL + 11 + 'sdjsdjsjdjjs')
-  console.log('fetch tttttt ok👌')
-} catch {
-  console.log('fetch tttttt pas ok😒')
-}
+// try {
+//   fetch(TT_BASE_URL + 11 + 'sdjsdjsjdjjs')
+//   console.log('fetch tttttt ok👌')
+// } catch {
+//   console.log('fetch tttttt pas ok😒')
+// }
 
 export function extractPlaylistIdYtb(url) {
   const youtubeMatch = url.match(/[?&]list=([A-Za-z0-9_-]+)/)
@@ -217,6 +205,7 @@ h1 {
     opacity: 0;
     transform: translateX(-50%) translateY(5px);
   }
+
   to {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
@@ -256,6 +245,7 @@ h1 {
   width: 22px;
   height: 22px;
 }
+
 .description {
   text-align: center;
   font-size: 1.1rem;

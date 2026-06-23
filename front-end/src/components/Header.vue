@@ -1,11 +1,19 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { API_BASE } from '@/api/apiPlaylist'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 const isDark = ref(false)
+const connected = ref(false)
 
-onMounted(() => {
+onMounted(async () => {
   // Check if dark mode is already enabled
   isDark.value = document.documentElement.classList.contains('dark')
+  checkAuth()
+  window.addEventListener('auth-changed', checkAuth)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('auth-changed', checkAuth)
 })
 
 const goHome = () => {
@@ -14,6 +22,10 @@ const goHome = () => {
 
 const goPageLogIn = () => {
   window.location.href = '/auth'
+}
+
+const goPageProfile = () => {
+  window.location.href = '/profile'
 }
 
 const toggleDarkMode = () => {
@@ -28,32 +40,28 @@ const toggleDarkMode = () => {
     localStorage.setItem('darkMode', 'false')
   }
 }
+
+const isLoggedIn = ref(false)
+
+async function checkAuth() {
+  try {
+    const res = await fetch(`${API_BASE}/account/profile`, { method: 'GET', credentials: 'include', })
+    isLoggedIn.value = res.ok
+  } catch { isLoggedIn.value = false }
+}
+
+
 </script>
 
 <template>
   <div class="header">
-    <img
-      @click="goHome"
-      class="logo"
-      v-if="isDark"
-      src="../assets/music-library-svgrepo-com-light.svg"
-      alt="logo"
-    />
-    <img
-      @click="goHome"
-      class="logo"
-      v-else
-      src="../assets/music-library-svgrepo-com.svg"
-      alt="logo"
-    />
+    <img @click="goHome" class="logo" v-if="isDark" src="../assets/music-library-svgrepo-com-light.svg" alt="logo" />
+    <img @click="goHome" class="logo" v-else src="../assets/music-library-svgrepo-com.svg" alt="logo" />
 
     <div class="header-right">
-      <button @click="goPageLogIn" class="btn-cta">Log in</button>
-      <button
-        @click="toggleDarkMode"
-        class="dark-mode-toggle"
-        :title="isDark ? 'Light Mode' : 'Dark Mode'"
-      >
+      <button v-if="isLoggedIn" @click="goPageProfile">Profil</button>
+      <button v-else @click="goPageLogIn" class="btn-cta">Log in</button>
+      <button @click="toggleDarkMode" class="dark-mode-toggle" :title="isDark ? 'Light Mode' : 'Dark Mode'">
         <img v-if="isDark" src="../assets/sun.svg" alt="Light Mode" class="toggle-icon" />
         <img v-else src="../assets/moon.svg" alt="Dark Mode" class="toggle-icon" />
       </button>
@@ -88,6 +96,7 @@ const toggleDarkMode = () => {
   padding: 8px;
   border-radius: 50%;
   transition: all 0.3s ease;
+
   hover {
     background: rgba(255, 255, 255, 0.1);
   }
