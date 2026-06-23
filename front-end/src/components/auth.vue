@@ -83,7 +83,7 @@ async function submitSignup() {
         fullName: signup.fullName,
         email: signup.email,
         password: signup.password,
-        confirmPassword: signup.confirmPassword,
+        passwordConfirmation: signup.confirmPassword,
       }),
     })
 
