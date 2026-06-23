@@ -38,70 +38,10 @@
 </template>
 
 <script setup>
-import { API_BASE } from '@/api/apiPlaylist'
 import { ref, reactive } from 'vue'
+import { submitLogin, submitSignup, login, signup, message } from '@/api/apiAuth'
 
 const mode = ref('login')
-const message = ref('')
-
-const login = reactive({ email: '', password: '' })
-const signup = reactive({ fullName: '', email: '', password: '', confirmPassword: '' })
-
-const backendBase = import.meta.env.VITE_API_BASE || API_BASE
-
-async function submitLogin() {
-  message.value = ''
-  try {
-    const res = await fetch(`${backendBase}/auth/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: login.email, password: login.password }),
-    })
-
-    const data = await res.json()
-    if (!res.ok) throw new Error(data?.message || JSON.stringify(data))
-
-    const token = data.token || data?.data?.token
-    if (token) {
-      localStorage.setItem('token', token)
-      message.value = 'Log in: ok.'
-    } else {
-      message.value = 'log in: ok'
-    }
-  } catch (err) {
-    message.value = 'Error: ' + (err.message || err)
-  }
-}
-
-async function submitSignup() {
-  message.value = ''
-  try {
-    const res = await fetch(`${backendBase}/auth/signup`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        fullName: signup.fullName,
-        email: signup.email,
-        password: signup.password,
-        passwordConfirmation: signup.confirmPassword,
-      }),
-    })
-
-    const data = await res.json()
-    if (!res.ok) throw new Error(data?.message || JSON.stringify(data))
-
-    const token = data.token || data?.data?.token
-    if (token) {
-      localStorage.setItem('token', token)
-      message.value = 'Account create and log in'
-      mode.value = 'login'
-    } else {
-      message.value = 'Sign in: ok'
-    }
-  } catch (err) {
-    message.value = 'Error: ' + (err.message || err)
-  }
-}
 </script>
 
 <style scoped>
