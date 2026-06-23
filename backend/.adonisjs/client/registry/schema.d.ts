@@ -67,6 +67,18 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/youtubes_controller').default['playlist']>>>
     }
   }
+  'api.tiktoks.playlist': {
+    methods: ["GET","HEAD"]
+    pattern: '/api/v1/playlistTikTok/:playlistId'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { playlistId: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/tiktoks_controller').default['playlist']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/tiktoks_controller').default['playlist']>>>
+    }
+  }
   'api.you_tube.stream_zip': {
     methods: ["POST"]
     pattern: '/api/v1/download'
@@ -77,18 +89,6 @@ export interface Registry {
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/youtubes_controller').default['streamZip']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/youtubes_controller').default['streamZip']>>>
-    }
-  }
-  'api.tiktoks.playlist': {
-    methods: ["GET","HEAD"]
-    pattern: '/api/v1/playlistTikTok/:playlistId'
-    types: {
-      body: {}
-      paramsTuple: [ParamValue]
-      params: { playlistId: ParamValue }
-      query: {}
-      response: unknown
-      errorResponse: unknown
     }
   }
 }

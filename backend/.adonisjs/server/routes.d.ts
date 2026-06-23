@@ -9,8 +9,8 @@ export type ScannedRoutes = {
     'api.profile.profile.show': { paramsTuple?: []; params?: {} }
     'api.profile.access_tokens.destroy': { paramsTuple?: []; params?: {} }
     'api.you_tube.playlist': { paramsTuple: [ParamValue]; params: {'playlistId': ParamValue} }
-    'api.you_tube.stream_zip': { paramsTuple?: []; params?: {} }
     'api.tiktoks.playlist': { paramsTuple: [ParamValue]; params: {'playlistId': ParamValue} }
+    'api.you_tube.stream_zip': { paramsTuple?: []; params?: {} }
   }
   GET: {
     'api.profile.profile.show': { paramsTuple?: []; params?: {} }

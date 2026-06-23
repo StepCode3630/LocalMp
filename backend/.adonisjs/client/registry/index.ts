@@ -36,17 +36,17 @@ const routes = {
     tokens: [{"old":"/api/v1/playlist/:playlistId","type":0,"val":"api","end":""},{"old":"/api/v1/playlist/:playlistId","type":0,"val":"v1","end":""},{"old":"/api/v1/playlist/:playlistId","type":0,"val":"playlist","end":""},{"old":"/api/v1/playlist/:playlistId","type":1,"val":"playlistId","end":""}],
     types: placeholder as Registry['api.you_tube.playlist']['types'],
   },
-  'api.you_tube.stream_zip': {
-    methods: ["POST"],
-    pattern: '/api/v1/download',
-    tokens: [{"old":"/api/v1/download","type":0,"val":"api","end":""},{"old":"/api/v1/download","type":0,"val":"v1","end":""},{"old":"/api/v1/download","type":0,"val":"download","end":""}],
-    types: placeholder as Registry['api.you_tube.stream_zip']['types'],
-  },
   'api.tiktoks.playlist': {
     methods: ["GET","HEAD"],
     pattern: '/api/v1/playlistTikTok/:playlistId',
     tokens: [{"old":"/api/v1/playlistTikTok/:playlistId","type":0,"val":"api","end":""},{"old":"/api/v1/playlistTikTok/:playlistId","type":0,"val":"v1","end":""},{"old":"/api/v1/playlistTikTok/:playlistId","type":0,"val":"playlistTikTok","end":""},{"old":"/api/v1/playlistTikTok/:playlistId","type":1,"val":"playlistId","end":""}],
     types: placeholder as Registry['api.tiktoks.playlist']['types'],
+  },
+  'api.you_tube.stream_zip': {
+    methods: ["POST"],
+    pattern: '/api/v1/download',
+    tokens: [{"old":"/api/v1/download","type":0,"val":"api","end":""},{"old":"/api/v1/download","type":0,"val":"v1","end":""},{"old":"/api/v1/download","type":0,"val":"download","end":""}],
+    types: placeholder as Registry['api.you_tube.stream_zip']['types'],
   },
 } as const satisfies Record<string, AdonisEndpoint>
 
