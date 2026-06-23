@@ -12,6 +12,10 @@ const goHome = () => {
   window.location.href = '/'
 }
 
+const goPageLogIn = () => {
+  window.location.href = '/auth'
+}
+
 const toggleDarkMode = () => {
   const html = document.documentElement
   isDark.value = !isDark.value
@@ -44,7 +48,7 @@ const toggleDarkMode = () => {
     />
 
     <div class="header-right">
-      <button class="btn-cta">Log in</button>
+      <button @click="goPageLogIn" class="btn-cta">Log in</button>
       <button
         @click="toggleDarkMode"
         class="dark-mode-toggle"
