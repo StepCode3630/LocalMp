@@ -3,8 +3,8 @@
 
   <form class="home-link-container" @submit.prevent="search">
     <p class="description">
-      Enter a link to a public album, choose between MP3 and MP4, select the platform, and download
-      all the videos. You can log to see your albums and in to download private albums.
+      Select the platform, enter a link to a public album, choose between MP3 and MP4, , and
+      download all the videos. You can log to see your albums and in to download private albums.
     </p>
 
     <div class="platform-selector">
