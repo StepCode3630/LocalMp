@@ -30,6 +30,7 @@
   --color-border-hover: var(--vt-c-divider-light-1);
   --color-heading: var(--vt-c-text-light-1);
   --color-text: var(--vt-c-text-light-1);
+  --color-text2: rgb(255, 255, 255);
   --bg-gradient: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(216, 216, 216, 1) 100%);
   --section-gap: 160px;
   --color-background-header: var(--color-blue);
@@ -55,6 +56,8 @@
   --color-border-hover: rgba(203, 255, 0, 0.28);
   --color-heading: var(--color-acid-yellow);
   --color-text: rgba(255, 255, 255, 0.95);
+  --color-text2: rgb(255, 255, 255);
+
   --bg-gradient: linear-gradient(
     180deg,
     var(--color-acid-black) 0%,

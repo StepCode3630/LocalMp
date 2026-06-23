@@ -9,6 +9,11 @@ const router = createRouter({
       component: () => import('../components/HomeLink.vue'),
     },
     {
+      path: '/auth',
+      name: 'Auth',
+      component: () => import('../components/auth.vue'),
+    },
+    {
       path: '/show/:playlistId',
       name: 'Show',
       component: () => import('../components/ShowVideosInPlaylist.vue'),
