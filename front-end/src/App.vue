@@ -1,14 +1,17 @@
 <template>
-  <header>
-    <Header />
-  </header>
+  <div class="app">
+    <header>
+      <Header />
+    </header>
 
-  <main>
-    <RouterView />
-  </main>
-  <footer>
-    <Footer />
-  </footer>
+    <main>
+      <RouterView />
+    </main>
+
+    <footer>
+      <Footer />
+    </footer>
+  </div>
 </template>
 
 <script setup>
@@ -18,8 +21,14 @@ import { RouterView } from 'vue-router'
 </script>
 
 <style scoped>
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 main {
-  min-height: 100%;
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
