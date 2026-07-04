@@ -16,20 +16,10 @@
         </div>
         <div>
           <div class="format-toggle">
-            <button
-              type="button"
-              :class="{ active: format === 'mp3' }"
-              @click="format = 'mp3'"
-              class="toggle-btn"
-            >
+            <button type="button" :class="{ active: format === 'mp3' }" @click="format = 'mp3'" class="toggle-btn">
               MP3
             </button>
-            <button
-              type="button"
-              :class="{ active: format === 'mp4' }"
-              @click="format = 'mp4'"
-              class="toggle-btn"
-            >
+            <button type="button" :class="{ active: format === 'mp4' }" @click="format = 'mp4'" class="toggle-btn">
               MP4
             </button>
             <button class="btn-cta" @click="download">Download</button>
@@ -45,7 +35,7 @@
         <p><strong>Total selected videos: </strong> {{ selectedVideos.length }}</p>
 
         <div v-for="video in videos" :key="video.id" class="video-item">
-          <input type="checkbox" :id="video.id" :value="video.id" v-model="selectedVideos" />
+          <input @click="logVideo" type="checkbox" :id="video.id" :value="video.id" v-model="selectedVideos" />
           <div class="video-info">
             <a class="title" :href="videoLink[video.id]" target="_blank" rel="noopener noreferrer">
               <p :for="video.id">{{ video.title }}</p>
@@ -234,6 +224,10 @@ export default {
     download() {
       downloadSelected(this.selectedVideos, this.format)
     },
+    logVideo(event) {
+      const videoId = event.target.value
+      console.log('Video clicked:', videoId)
+    },
   },
 }
 </script>
@@ -247,6 +241,7 @@ h1 {
   font-size: 1.5rem;
   width: 1000px;
 }
+
 .video-item {
   border: var(--color-text) solid 1px;
   border-radius: 25px;
@@ -279,6 +274,7 @@ h1 {
 .title p {
   cursor: pointer;
 }
+
 .thumbnailPP {
   width: auto;
   height: 100px;
@@ -302,6 +298,7 @@ h1 {
   flex: 1;
   color: var(--color-text);
 }
+
 .video-info .meta {
   display: flex;
   align-items: center;
@@ -310,15 +307,18 @@ h1 {
   font-weight: 600;
   margin-right: 30px;
 }
+
 .video-info .meta .author {
   color: var(--color-text);
 }
+
 .thumb-row {
   display: flex;
   align-items: center;
   flex-direction: column;
   gap: 12px;
 }
+
 .duration {
   background: var(--color-text2);
   color: var(--color-text);
@@ -346,11 +346,13 @@ h1 {
   color: black;
   font-size: 0.9rem;
 }
+
 .controls {
   margin-bottom: 12px;
   display: flex;
   justify-content: space-between;
 }
+
 .error {
   color: #b00020;
 }
