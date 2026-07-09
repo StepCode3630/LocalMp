@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   db:
     image: mysql:8.0
@@ -11,4 +9,7 @@ services:
     ports:
       - '6033:3306'
     volumes:
-      - ./tmp/mysql:/var/lib/mysql
+      - ./tmp/mysql:/var/lib/mysql:Z
+
+    # volumes:
+    #   - ./tmp/mysql:/var/lib/mysql

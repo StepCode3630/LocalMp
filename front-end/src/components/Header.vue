@@ -1,19 +1,58 @@
 <script setup>
 import { API_BASE } from '@/api/apiPlaylist'
 import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { defineStore } from 'pinia'
 
 const isDark = ref(false)
-const connected = ref(false)
 
-onMounted(async () => {
-  // Check if dark mode is already enabled
+const useAuthStore = defineStore('auth', {
+  state: () => ({
+    user: null,
+    loading: true,
+  }),
+  actions: {
+    async fetchMe() {
+      this.loading = true
+      try {
+        const res = await fetch(`${API_BASE}/account/profile`, {
+          method: 'GET',
+          credentials: 'include',
+          headers: { Accept: 'application/json' },
+        })
+
+        if (!res.ok) {
+          if (res.status === 401) {
+            this.user = null
+            return
+          }
+          throw new Error(`Failed to fetch profile: ${res.status}`)
+        }
+
+        const data = await res.json().catch(() => null)
+        this.user = data?.user ?? data ?? null
+      } catch (e) {
+        this.user = null
+      } finally {
+        this.loading = false
+      }
+    },
+  },
+})
+
+const auth = useAuthStore()
+
+const refreshAuth = () => {
+  auth.fetchMe()
+}
+
+onMounted(() => {
   isDark.value = document.documentElement.classList.contains('dark')
-  checkAuth()
-  window.addEventListener('auth-changed', checkAuth)
+  refreshAuth()
+  window.addEventListener('auth-changed', refreshAuth)
 })
 
 onBeforeUnmount(() => {
-  window.removeEventListener('auth-changed', checkAuth)
+  window.removeEventListener('auth-changed', refreshAuth)
 })
 
 const goHome = () => {
@@ -40,17 +79,6 @@ const toggleDarkMode = () => {
     localStorage.setItem('darkMode', 'false')
   }
 }
-
-const isLoggedIn = ref(false)
-
-async function checkAuth() {
-  try {
-    const res = await fetch(`${API_BASE}/account/profile`, { method: 'GET', credentials: 'include', })
-    isLoggedIn.value = res.ok
-  } catch { isLoggedIn.value = false }
-}
-
-
 </script>
 
 <template>
@@ -59,7 +87,8 @@ async function checkAuth() {
     <img @click="goHome" class="logo" v-else src="../assets/music-library-svgrepo-com.svg" alt="logo" />
 
     <div class="header-right">
-      <button v-if="isLoggedIn" @click="goPageProfile">Profil</button>
+      <button v-if="auth.loading" disabled class="btn-cta">Chargement...</button>
+      <button v-else-if="auth.user" @click="goPageProfile">Profil</button>
       <button v-else @click="goPageLogIn" class="btn-cta">Log in</button>
       <button @click="toggleDarkMode" class="dark-mode-toggle" :title="isDark ? 'Light Mode' : 'Dark Mode'">
         <img v-if="isDark" src="../assets/sun.svg" alt="Light Mode" class="toggle-icon" />
