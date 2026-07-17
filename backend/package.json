@@ -72,6 +72,7 @@
     "cheerio": "^1.2.0",
     "cross-spawn": "^7.0.6",
     "luxon": "^3.7.2",
+    "mysql2": "^3.23.0",
     "node-fetch": "^3.3.2",
     "reflect-metadata": "^0.2.2",
     "stream": "^0.0.3"

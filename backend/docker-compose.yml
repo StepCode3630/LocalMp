@@ -9,7 +9,7 @@ services:
     ports:
       - '6033:3306'
     volumes:
-      - ./tmp/mysql:/var/lib/mysql:Z
+      - db_data:/var/lib/mysql
 
-    # volumes:
-    #   - ./tmp/mysql:/var/lib/mysql
+volumes:
+  db_data:
