@@ -22,26 +22,26 @@ router
   .group(() => {
     router
       .group(() => {
-        router.post('signup', [controllers.NewAccount, 'store'])
-        router.post('login', [controllers.AccessTokens, 'store'])
+        router.post('signup', [controllers.NewAccount, 'store']).as('signup')
+        router.post('login', [controllers.AccessTokens, 'store']).as('login')
       })
       .prefix('auth')
       .as('auth')
 
     router
       .group(() => {
-        router.get('profile', [controllers.Profile, 'show'])
-        router.post('logout', [controllers.AccessTokens, 'destroy'])
+        router.get('profile', [controllers.Profile, 'show']).as('show')
+        router.post('logout', [controllers.AccessTokens, 'destroy']).as('logout')
       })
       .prefix('account')
       .as('profile')
       .use(middleware.auth())
 
     // router.get('youtube/info', [YouTubeController, 'info2'])
-    router.get('playlist/:playlistId', [YouTubeController, 'playlist'])
-    router.get('playlistTikTok/:playlistId', [TiktoksController, 'playlist'])
+    router.get('playlist/:playlistId', [YouTubeController, 'playlist']).as('playlist')
+    router.get('playlistTikTok/:playlistId', [TiktoksController, 'playlist']).as('playlistTikTok')
 
-    router.post('/download', [YouTubeController, 'streamZip'])
+    router.post('/download', [YouTubeController, 'streamZip']).as('download')
   })
   .prefix('/api/v1')
   .as('api')

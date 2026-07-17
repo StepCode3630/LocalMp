@@ -1,10 +1,29 @@
-import { UserSchema } from '#database/schema'
+import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { DateTime } from 'luxon'
 import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { type AccessToken, DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 
-export default class User extends compose(UserSchema, withAuthFinder(hash)) {
+export default class User extends compose(BaseModel, withAuthFinder(hash)) {
+  @column({ isPrimary: true })
+  declare id: number
+
+  @column()
+  declare fullName: string | null
+
+  @column()
+  declare email: string
+
+  @column({ serializeAs: null })
+  declare password: string
+
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
+
   static accessTokens = DbAccessTokensProvider.forModel(User, {
     expiresIn: '30 days',
     prefix: 'oat_',
@@ -21,4 +40,11 @@ export default class User extends compose(UserSchema, withAuthFinder(hash)) {
     }
     return `${first.slice(0, 2)}`.toUpperCase()
   }
+
+  static refreshTokens = DbAccessTokensProvider.forModel(User, {
+    prefix: 'rt_',
+    table: 'jwt_refresh_tokens',
+    type: 'jwt_refresh_token',
+    tokenSecretLength: 40,
+  })
 }

@@ -4,29 +4,29 @@ type ParamValue = string | number | bigint | boolean
 
 export type ScannedRoutes = {
   ALL: {
-    'api.auth.new_account.store': { paramsTuple?: []; params?: {} }
-    'api.auth.access_tokens.store': { paramsTuple?: []; params?: {} }
-    'api.profile.profile.show': { paramsTuple?: []; params?: {} }
-    'api.profile.access_tokens.destroy': { paramsTuple?: []; params?: {} }
-    'api.you_tube.playlist': { paramsTuple: [ParamValue]; params: {'playlistId': ParamValue} }
-    'api.tiktoks.playlist': { paramsTuple: [ParamValue]; params: {'playlistId': ParamValue} }
-    'api.you_tube.stream_zip': { paramsTuple?: []; params?: {} }
+    'api.auth.signup': { paramsTuple?: []; params?: {} }
+    'api.auth.login': { paramsTuple?: []; params?: {} }
+    'api.profile.show': { paramsTuple?: []; params?: {} }
+    'api.profile.logout': { paramsTuple?: []; params?: {} }
+    'api.playlist': { paramsTuple: [ParamValue]; params: {'playlistId': ParamValue} }
+    'api.playlistTikTok': { paramsTuple: [ParamValue]; params: {'playlistId': ParamValue} }
+    'api.download': { paramsTuple?: []; params?: {} }
   }
   GET: {
-    'api.profile.profile.show': { paramsTuple?: []; params?: {} }
-    'api.you_tube.playlist': { paramsTuple: [ParamValue]; params: {'playlistId': ParamValue} }
-    'api.tiktoks.playlist': { paramsTuple: [ParamValue]; params: {'playlistId': ParamValue} }
+    'api.profile.show': { paramsTuple?: []; params?: {} }
+    'api.playlist': { paramsTuple: [ParamValue]; params: {'playlistId': ParamValue} }
+    'api.playlistTikTok': { paramsTuple: [ParamValue]; params: {'playlistId': ParamValue} }
   }
   HEAD: {
-    'api.profile.profile.show': { paramsTuple?: []; params?: {} }
-    'api.you_tube.playlist': { paramsTuple: [ParamValue]; params: {'playlistId': ParamValue} }
-    'api.tiktoks.playlist': { paramsTuple: [ParamValue]; params: {'playlistId': ParamValue} }
+    'api.profile.show': { paramsTuple?: []; params?: {} }
+    'api.playlist': { paramsTuple: [ParamValue]; params: {'playlistId': ParamValue} }
+    'api.playlistTikTok': { paramsTuple: [ParamValue]; params: {'playlistId': ParamValue} }
   }
   POST: {
-    'api.auth.new_account.store': { paramsTuple?: []; params?: {} }
-    'api.auth.access_tokens.store': { paramsTuple?: []; params?: {} }
-    'api.profile.access_tokens.destroy': { paramsTuple?: []; params?: {} }
-    'api.you_tube.stream_zip': { paramsTuple?: []; params?: {} }
+    'api.auth.signup': { paramsTuple?: []; params?: {} }
+    'api.auth.login': { paramsTuple?: []; params?: {} }
+    'api.profile.logout': { paramsTuple?: []; params?: {} }
+    'api.download': { paramsTuple?: []; params?: {} }
   }
 }
 declare module '@adonisjs/core/types/http' {

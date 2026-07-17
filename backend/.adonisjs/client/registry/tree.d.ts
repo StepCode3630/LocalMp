@@ -4,27 +4,15 @@ import type { routes } from './index.ts'
 export interface ApiDefinition {
   api: {
     auth: {
-      newAccount: {
-        store: typeof routes['api.auth.new_account.store']
-      }
-      accessTokens: {
-        store: typeof routes['api.auth.access_tokens.store']
-      }
+      signup: typeof routes['api.auth.signup']
+      login: typeof routes['api.auth.login']
     }
     profile: {
-      profile: {
-        show: typeof routes['api.profile.profile.show']
-      }
-      accessTokens: {
-        destroy: typeof routes['api.profile.access_tokens.destroy']
-      }
+      show: typeof routes['api.profile.show']
+      logout: typeof routes['api.profile.logout']
     }
-    youTube: {
-      playlist: typeof routes['api.you_tube.playlist']
-      streamZip: typeof routes['api.you_tube.stream_zip']
-    }
-    tiktoks: {
-      playlist: typeof routes['api.tiktoks.playlist']
-    }
+    playlist: typeof routes['api.playlist']
+    playlistTikTok: typeof routes['api.playlistTikTok']
+    download: typeof routes['api.download']
   }
 }

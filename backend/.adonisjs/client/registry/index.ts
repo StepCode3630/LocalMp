@@ -6,47 +6,47 @@ import type { ApiDefinition } from './tree.d.ts'
 const placeholder: any = {}
 
 const routes = {
-  'api.auth.new_account.store': {
+  'api.auth.signup': {
     methods: ["POST"],
     pattern: '/api/v1/auth/signup',
     tokens: [{"old":"/api/v1/auth/signup","type":0,"val":"api","end":""},{"old":"/api/v1/auth/signup","type":0,"val":"v1","end":""},{"old":"/api/v1/auth/signup","type":0,"val":"auth","end":""},{"old":"/api/v1/auth/signup","type":0,"val":"signup","end":""}],
-    types: placeholder as Registry['api.auth.new_account.store']['types'],
+    types: placeholder as Registry['api.auth.signup']['types'],
   },
-  'api.auth.access_tokens.store': {
+  'api.auth.login': {
     methods: ["POST"],
     pattern: '/api/v1/auth/login',
     tokens: [{"old":"/api/v1/auth/login","type":0,"val":"api","end":""},{"old":"/api/v1/auth/login","type":0,"val":"v1","end":""},{"old":"/api/v1/auth/login","type":0,"val":"auth","end":""},{"old":"/api/v1/auth/login","type":0,"val":"login","end":""}],
-    types: placeholder as Registry['api.auth.access_tokens.store']['types'],
+    types: placeholder as Registry['api.auth.login']['types'],
   },
-  'api.profile.profile.show': {
+  'api.profile.show': {
     methods: ["GET","HEAD"],
     pattern: '/api/v1/account/profile',
     tokens: [{"old":"/api/v1/account/profile","type":0,"val":"api","end":""},{"old":"/api/v1/account/profile","type":0,"val":"v1","end":""},{"old":"/api/v1/account/profile","type":0,"val":"account","end":""},{"old":"/api/v1/account/profile","type":0,"val":"profile","end":""}],
-    types: placeholder as Registry['api.profile.profile.show']['types'],
+    types: placeholder as Registry['api.profile.show']['types'],
   },
-  'api.profile.access_tokens.destroy': {
+  'api.profile.logout': {
     methods: ["POST"],
     pattern: '/api/v1/account/logout',
     tokens: [{"old":"/api/v1/account/logout","type":0,"val":"api","end":""},{"old":"/api/v1/account/logout","type":0,"val":"v1","end":""},{"old":"/api/v1/account/logout","type":0,"val":"account","end":""},{"old":"/api/v1/account/logout","type":0,"val":"logout","end":""}],
-    types: placeholder as Registry['api.profile.access_tokens.destroy']['types'],
+    types: placeholder as Registry['api.profile.logout']['types'],
   },
-  'api.you_tube.playlist': {
+  'api.playlist': {
     methods: ["GET","HEAD"],
     pattern: '/api/v1/playlist/:playlistId',
     tokens: [{"old":"/api/v1/playlist/:playlistId","type":0,"val":"api","end":""},{"old":"/api/v1/playlist/:playlistId","type":0,"val":"v1","end":""},{"old":"/api/v1/playlist/:playlistId","type":0,"val":"playlist","end":""},{"old":"/api/v1/playlist/:playlistId","type":1,"val":"playlistId","end":""}],
-    types: placeholder as Registry['api.you_tube.playlist']['types'],
+    types: placeholder as Registry['api.playlist']['types'],
   },
-  'api.tiktoks.playlist': {
+  'api.playlistTikTok': {
     methods: ["GET","HEAD"],
     pattern: '/api/v1/playlistTikTok/:playlistId',
     tokens: [{"old":"/api/v1/playlistTikTok/:playlistId","type":0,"val":"api","end":""},{"old":"/api/v1/playlistTikTok/:playlistId","type":0,"val":"v1","end":""},{"old":"/api/v1/playlistTikTok/:playlistId","type":0,"val":"playlistTikTok","end":""},{"old":"/api/v1/playlistTikTok/:playlistId","type":1,"val":"playlistId","end":""}],
-    types: placeholder as Registry['api.tiktoks.playlist']['types'],
+    types: placeholder as Registry['api.playlistTikTok']['types'],
   },
-  'api.you_tube.stream_zip': {
+  'api.download': {
     methods: ["POST"],
     pattern: '/api/v1/download',
     tokens: [{"old":"/api/v1/download","type":0,"val":"api","end":""},{"old":"/api/v1/download","type":0,"val":"v1","end":""},{"old":"/api/v1/download","type":0,"val":"download","end":""}],
-    types: placeholder as Registry['api.you_tube.stream_zip']['types'],
+    types: placeholder as Registry['api.download']['types'],
   },
 } as const satisfies Record<string, AdonisEndpoint>
 

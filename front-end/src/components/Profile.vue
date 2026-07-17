@@ -28,7 +28,17 @@ async function fetchProfile() {
     loading.value = true
     error.value = ''
     try {
-        const res = await fetch(`${API_BASE}/account/profile`, { credentials: 'include' })
+        const headers = {}
+        const token = localStorage.getItem('access_token')
+
+        if (token) {
+            headers.Authorization = `Bearer ${token}`
+        }
+
+        const res = await fetch(`${API_BASE}/account/profile`, {
+            credentials: 'include',
+            headers,
+        })
         if (!res.ok) {
             const txt = await res.text().catch(() => '')
             throw new Error(`Status ${res.status} ${txt}`)
@@ -42,7 +52,19 @@ async function fetchProfile() {
 }
 
 async function logout() {
-    await fetch(`${API_BASE}/account/logout`, { method: 'POST', credentials: 'include' })
+    const headers = {}
+    const token = localStorage.getItem('access_token')
+
+    if (token) {
+        headers.Authorization = `Bearer ${token}`
+    }
+
+    await fetch(`${API_BASE}/account/logout`, {
+        method: 'POST',
+        credentials: 'include',
+        headers,
+    })
+    localStorage.removeItem('access_token')
     // notify app and redirect to home
     try { window.dispatchEvent(new Event('auth-changed')) } catch (e) { }
     window.location.href = '/'

@@ -7,7 +7,7 @@ import type { InferInput, SimpleError } from '@vinejs/vine/types'
 export type ParamValue = string | number | bigint | boolean
 
 export interface Registry {
-  'api.auth.new_account.store': {
+  'api.auth.signup': {
     methods: ["POST"]
     pattern: '/api/v1/auth/signup'
     types: {
@@ -19,7 +19,7 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/new_account_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'api.auth.access_tokens.store': {
+  'api.auth.login': {
     methods: ["POST"]
     pattern: '/api/v1/auth/login'
     types: {
@@ -31,7 +31,7 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/access_tokens_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
-  'api.profile.profile.show': {
+  'api.profile.show': {
     methods: ["GET","HEAD"]
     pattern: '/api/v1/account/profile'
     types: {
@@ -43,7 +43,7 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/profile_controller').default['show']>>>
     }
   }
-  'api.profile.access_tokens.destroy': {
+  'api.profile.logout': {
     methods: ["POST"]
     pattern: '/api/v1/account/logout'
     types: {
@@ -55,7 +55,7 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/access_tokens_controller').default['destroy']>>>
     }
   }
-  'api.you_tube.playlist': {
+  'api.playlist': {
     methods: ["GET","HEAD"]
     pattern: '/api/v1/playlist/:playlistId'
     types: {
@@ -67,7 +67,7 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/youtubes_controller').default['playlist']>>>
     }
   }
-  'api.tiktoks.playlist': {
+  'api.playlistTikTok': {
     methods: ["GET","HEAD"]
     pattern: '/api/v1/playlistTikTok/:playlistId'
     types: {
@@ -79,7 +79,7 @@ export interface Registry {
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/tiktoks_controller').default['playlist']>>>
     }
   }
-  'api.you_tube.stream_zip': {
+  'api.download': {
     methods: ["POST"]
     pattern: '/api/v1/download'
     types: {

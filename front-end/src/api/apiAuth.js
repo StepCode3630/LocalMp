@@ -77,6 +77,10 @@ export async function submitLogin() {
       throw new Error(getErrorMessage(data, `Login failed (${res.status})`))
     }
 
+    if (data?.token) {
+      localStorage.setItem('access_token', data.token)
+    }
+
     message.value = 'Log in: ok.'
     try {
       window.dispatchEvent(new Event('auth-changed'))
@@ -130,6 +134,10 @@ export async function submitSignup() {
 
     if (!res.ok) {
       throw new Error(getErrorMessage(data, `Signup failed (${res.status})`))
+    }
+
+    if (data?.token) {
+      localStorage.setItem('access_token', data.token)
     }
 
     message.value = 'Sign in: ok.'
