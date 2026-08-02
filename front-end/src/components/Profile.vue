@@ -19,6 +19,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { API_BASE } from '@/api/apiPlaylist'
+import { clearAuthCookie, getAuthHeaders } from '@/api/apiAuth'
 
 const user = ref(null)
 const loading = ref(true)
@@ -28,16 +29,9 @@ async function fetchProfile() {
     loading.value = true
     error.value = ''
     try {
-        const headers = {}
-        const token = localStorage.getItem('access_token')
-
-        if (token) {
-            headers.Authorization = `Bearer ${token}`
-        }
-
         const res = await fetch(`${API_BASE}/account/profile`, {
             credentials: 'include',
-            headers,
+            headers: getAuthHeaders(),
         })
         if (!res.ok) {
             const txt = await res.text().catch(() => '')
@@ -52,20 +46,17 @@ async function fetchProfile() {
 }
 
 async function logout() {
-    const headers = {}
-    const token = localStorage.getItem('access_token')
-
-    if (token) {
-        headers.Authorization = `Bearer ${token}`
+    try {
+        await fetch(`${API_BASE}/account/logout`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: getAuthHeaders(),
+        })
+    } catch (err) {
+        console.error(err)
     }
 
-    await fetch(`${API_BASE}/account/logout`, {
-        method: 'POST',
-        credentials: 'include',
-        headers,
-    })
-    localStorage.removeItem('access_token')
-    // notify app and redirect to home
+    clearAuthCookie()
     try { window.dispatchEvent(new Event('auth-changed')) } catch (e) { }
     window.location.href = '/'
 }

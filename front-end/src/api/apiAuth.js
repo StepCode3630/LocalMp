@@ -8,6 +8,21 @@ const submitting = ref(false)
 
 export { login, signup, message, submitting }
 
+export function getAuthHeaders() {
+  return {
+    Accept: 'application/json',
+  }
+}
+
+export function clearAuthCookie() {
+  document.cookie = 'access_token=; Max-Age=0; path=/; SameSite=Lax'
+  if (typeof window !== 'undefined') {
+    try {
+      window.localStorage.removeItem('access_token')
+    } catch (e) {}
+  }
+}
+
 function getErrorMessage(data, fallback) {
   if (typeof data === 'string' && data) {
     return data
@@ -77,10 +92,6 @@ export async function submitLogin() {
       throw new Error(getErrorMessage(data, `Login failed (${res.status})`))
     }
 
-    if (data?.token) {
-      localStorage.setItem('access_token', data.token)
-    }
-
     message.value = 'Log in: ok.'
     try {
       window.dispatchEvent(new Event('auth-changed'))
@@ -134,10 +145,6 @@ export async function submitSignup() {
 
     if (!res.ok) {
       throw new Error(getErrorMessage(data, `Signup failed (${res.status})`))
-    }
-
-    if (data?.token) {
-      localStorage.setItem('access_token', data.token)
     }
 
     message.value = 'Sign in: ok.'

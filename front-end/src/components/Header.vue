@@ -14,19 +14,10 @@ const useAuthStore = defineStore('auth', {
     async fetchMe() {
       this.loading = true
       try {
-        const headers = {
-          Accept: 'application/json',
-        }
-        const token = localStorage.getItem('access_token')
-
-        if (token) {
-          headers.Authorization = `Bearer ${token}`
-        }
-
         const res = await fetch(`${API_BASE}/account/profile`, {
           method: 'GET',
           credentials: 'include',
-          headers,
+          headers: { Accept: 'application/json' },
         })
 
         if (!res.ok) {
