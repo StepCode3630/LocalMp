@@ -4,12 +4,12 @@
         <div v-if="loading">Chargement...</div>
         <div v-else-if="error" class="error">Erreur: {{ error }}</div>
         <div v-else>
-            <p><strong>ID:</strong> {{ user.id }}</p>
-            <p><strong>Nom:</strong> {{ user.fullName }}</p>
-            <p><strong>Email:</strong> {{ user.email }}</p>
-            <p><strong>Initiales:</strong> {{ user.initials }}</p>
-            <p><strong>Créé le:</strong> {{ user.createdAt }}</p>
-            <p><strong>Mis à jour:</strong> {{ user.updatedAt }}</p>
+            <p><strong>ID:</strong> {{ user.data.id }}</p>
+            <p><strong>Nom:</strong> {{ user.data.fullName }}</p>
+            <p><strong>Email:</strong> {{ user.data.email }}</p>
+            <p><strong>Initiales:</strong> {{ user.data.initials }}</p>
+            <p><strong>Créé le:</strong> {{ user.data.createdAt }}</p>
+            <p><strong>Mis à jour:</strong> {{ user.data.updatedAt }}</p>
 
             <button @click="logout" class="btn-cta">Se déconnecter</button>
         </div>
@@ -37,7 +37,9 @@ async function fetchProfile() {
             const txt = await res.text().catch(() => '')
             throw new Error(`Status ${res.status} ${txt}`)
         }
-        user.value = await res.json()
+        const data = await res.json()
+        console.log('profile data:', data)
+        user.value = data
     } catch (err) {
         error.value = err.message || String(err)
     } finally {
