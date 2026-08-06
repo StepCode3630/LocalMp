@@ -7,6 +7,7 @@ export type ScannedRoutes = {
     'api.auth.signup': { paramsTuple?: []; params?: {} }
     'api.auth.login': { paramsTuple?: []; params?: {} }
     'api.profile.show': { paramsTuple?: []; params?: {} }
+    'api.profile.update': { paramsTuple?: []; params?: {} }
     'api.profile.logout': { paramsTuple?: []; params?: {} }
     'api.playlist': { paramsTuple: [ParamValue]; params: {'playlistId': ParamValue} }
     'api.playlistTikTok': { paramsTuple: [ParamValue]; params: {'playlistId': ParamValue} }
@@ -27,6 +28,9 @@ export type ScannedRoutes = {
     'api.auth.login': { paramsTuple?: []; params?: {} }
     'api.profile.logout': { paramsTuple?: []; params?: {} }
     'api.download': { paramsTuple?: []; params?: {} }
+  }
+  PATCH: {
+    'api.profile.update': { paramsTuple?: []; params?: {} }
   }
 }
 declare module '@adonisjs/core/types/http' {

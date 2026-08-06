@@ -19,6 +19,11 @@ const router = createRouter({
       component: () => import('../components/Profile.vue'),
     },
     {
+      path: '/profile/edit',
+      name: 'EditProfile',
+      component: () => import('../components/EditProfile.vue'),
+    },
+    {
       path: '/show/:playlistId',
       name: 'Show',
       component: () => import('../components/ShowVideosInPlaylist.vue'),

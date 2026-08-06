@@ -9,6 +9,7 @@ export interface ApiDefinition {
     }
     profile: {
       show: typeof routes['api.profile.show']
+      update: typeof routes['api.profile.update']
       logout: typeof routes['api.profile.logout']
     }
     playlist: typeof routes['api.playlist']
