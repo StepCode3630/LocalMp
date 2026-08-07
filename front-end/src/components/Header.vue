@@ -88,8 +88,13 @@ const toggleDarkMode = () => {
 
     <div class="header-right">
       <button v-if="auth.loading" disabled class="btn-cta">Chargement...</button>
-      <button v-else-if="auth.user" @click="goPageProfile">Profil</button>
+      <button v-else-if="auth.user" @click="goPageProfile" class="profile-btn">
+        {{ auth.user.data.initials }}
+      </button>
+
       <button v-else @click="goPageLogIn" class="btn-cta">Log in</button>
+      <p v-if="auth.user">{{ auth.user.data.fullName }}</p>
+
       <button @click="toggleDarkMode" class="dark-mode-toggle" :title="isDark ? 'Light Mode' : 'Dark Mode'">
         <img v-if="isDark" src="../assets/sun.svg" alt="Light Mode" class="toggle-icon" />
         <img v-else src="../assets/moon.svg" alt="Dark Mode" class="toggle-icon" />
@@ -145,5 +150,28 @@ const toggleDarkMode = () => {
 .logo {
   height: 100px;
   cursor: pointer;
+}
+
+.profile-btn {
+  background-color: var(--color-background2);
+  color: var(--color-text2);
+  border: none;
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 10px;
+  margin: 10px
+}
+
+.profile-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
 }
 </style>
